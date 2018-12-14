@@ -1,0 +1,20 @@
+<?xml version="1.0"?>
+<!DOCTYPE mycat:schema SYSTEM "schema.dtd">
+<mycat:schema xmlns:mycat="http://io.mycat/">
+
+	<schema name="DB" checkSQLschema="false" >	
+		<table name="item"        primaryKey="id" dataNode="node_01,node_02,node_03" rule="sharding-by-mod-id" />
+		<table name="item_detail" primaryKey="id" dataNode="node_01,node_02,node_03" rule="sharding-by-mod-id" />
+		<table name="users"       primaryKey="id" dataNode="node_01,node_02,node_03" rule="sharding-by-mod-id" />		
+	</schema>
+	
+	<dataNode name="node_01" dataHost="dataHost" database="db01" />
+	<dataNode name="node_02" dataHost="dataHost" database="db02" />
+	<dataNode name="node_03" dataHost="dataHost" database="db03" />
+	
+	<dataHost name="dataHost" maxCon="1000" minCon="10" balance="0" writeType="0" dbType="mysql" dbDriver="native">  
+            <heartbeat>select users()</heartbeat>  
+            <writeHost host="server" url="127.0.0.1:3306" user="root" password="Kaka3511!"/>  
+    </dataHost> 
+	
+</mycat:schema>
