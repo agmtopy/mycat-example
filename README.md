@@ -4,6 +4,7 @@ mycat初体验
 
 
 mycat安装使用注意事项：
+
 1、主要关注server.xml,schema.xml,rule.xml;
 
 2、Navicat12对mycat支持较好（DataGrip有点bug...）;
